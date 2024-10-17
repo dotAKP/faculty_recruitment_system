@@ -1,0 +1,29 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "Backend module",
+  "main": "app.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dotAKP/faculty_recruitment_system.git"
+  },
+  "author": "Ashish Kumar Patel",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dotAKP/faculty_recruitment_system/issues"
+  },
+  "homepage": "https://github.com/dotAKP/faculty_recruitment_system#readme",
+  "dependencies": {
+    "ejs": "^3.1.10",
+    "express": "^4.21.1",
+    "express-fileupload": "^1.5.1",
+    "jsonwebtoken": "^9.0.2",
+    "nodemailer": "^6.9.15",
+    "nodemon": "^3.1.7"
+  }
+}

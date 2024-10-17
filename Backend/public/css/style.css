@@ -1,0 +1,52 @@
+
+*{
+    margin: 0px;
+}
+
+#header{
+    height: 60px;
+    background-color: white;
+    font-family: carndara;
+    padding: 10px;
+} 
+#logo{
+    height: 50px;
+    width: 50px;
+    margin-left: 30px;
+   
+}
+#heading{
+    font-size: 30px;
+    position: absolute;
+    margin-left: 10px;
+    margin-top: 10px;
+}
+#nav{
+    height: 30px;
+    padding: 10px;
+    background-color: black;
+}
+#nav ul{
+   list-style: none;
+   
+}
+#nav ul li {
+    display: inline;
+}
+#nav ul li a {
+    font-family: candara;
+    font-size: 22px;
+    text-decoration: none;
+    margin-left: 110px;
+    color: white;
+}
+#banner{
+    margin: auto;
+    height: 545px;
+}
+
+#banner_img{
+  height: 545px;
+  margin-left: 280px;
+  width: 60%;
+}
