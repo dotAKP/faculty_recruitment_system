@@ -50,3 +50,37 @@
   margin-left: 280px;
   width: 60%;
 }
+#loginbox{
+    height: auto ;
+    width: 400px;
+    margin: auto;
+    margin-top: 60px;
+    padding: 20px;
+    font-family: candara;
+    font-size: 24px;
+}
+
+#input{
+    font-size: 16px;
+    height: 30px;
+    width: 300px;
+    margin: 8px;
+}
+#inputbtn{
+    font-size: 18px;
+    font-family: candara;
+    height: 40px;
+    width: 310px;
+    margin: 8px;
+    border-width: 0px;
+    background-color: black;
+    color: white;
+}
+#demolink{
+    font-size: 16px;
+    color: darkslategray;
+    text-decoration: none;
+}
+#demolink:hover{
+    color: red;
+}
