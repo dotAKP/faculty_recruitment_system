@@ -18,10 +18,11 @@
     </div>
     <div id="loginbox">
         <center><h2> Admin Login Form</h2>
-        <form action="">
+        <span style="color: red;"><%=msg%></span>
+        <form action="/admin/adminLogin" method="post">
             <input type="email" id="input" placeholder="Enter Email" id="email" name="email"> <br>
             <input type="password" id="input" placeholder="Enter password" id="password" name="password"> <br>
-            <input type="submit" id="inputbtn" value="submit" > <br>
+            <input type="submit" id="inputbtn" value="login" > <br>
             <input type="reset" id="inputbtn" value="reset"> <br>
         </form>   
     </center>
