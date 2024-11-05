@@ -2,7 +2,8 @@
 <%- include('./homeHeader.ejs') %>
    <div id="loginbox">
         <center><h2> Recruiter Login Form</h2>
-        <form action="">
+            <span style="color:red;"><%=message%></span>
+        <form action="/recruiter/recruiterLogin" method="post">
             <input type="email" id="input" placeholder="Enter Email" name="email"> <br>
             <input type="password" id="input" placeholder="Enter password" name="password"> <br>
             <input type="submit" id="inputbtn" value="submit" > <br>

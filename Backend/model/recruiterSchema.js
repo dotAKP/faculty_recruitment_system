@@ -14,6 +14,7 @@ const RecruiterSchema = mongoose.Schema({
     email : {
         type : String,
         required : true,
+        unique : true,
     },
     password : {
         type : String,
@@ -30,6 +31,7 @@ const RecruiterSchema = mongoose.Schema({
     },
     status : {
         type : String,
+        default : true, 
         required : true,
     },
     adminVerify : {
