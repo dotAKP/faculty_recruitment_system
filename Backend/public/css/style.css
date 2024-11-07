@@ -37,7 +37,7 @@
     font-family: candara;
     font-size: 22px;
     text-decoration: none;
-    margin-left: 110px;
+    margin-left: 50px;
     color: white;
 }
 #banner{
@@ -83,4 +83,8 @@
 }
 #demolink:hover{
     color: red;
+}
+
+#space {
+    margin-top: 40px;
 }

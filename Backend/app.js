@@ -4,11 +4,11 @@
 import adminRouter from './router/adminRouter.js';
 import candidateRouter from './router/candidateRouter.js';
 import recruiterRouter from './router/recruiterRouter.js';
-
+import cookieParser from 'cookie-parser';
  app.use(express.urlencoded({extended:true}));
  app.use(express.json());
  app.use(express.static('public'));
-
+app.use(cookieParser());
 
  app.set("views","views");
  app.set("view engine","ejs");
