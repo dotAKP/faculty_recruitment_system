@@ -1,0 +1,51 @@
+<%- include('./candidateHomeHeader.ejs') %>
+
+<body >
+    <br>
+    <center> <h2> Vacancy List</h2> </center>
+    <% if(message == "No Record Found !") { %>
+       <br>
+        <center> 
+            <span style="font-size: 20px; color: red;"> <%= message %></span>
+        </center>
+        <br>
+   <% } else { %>
+    <table id="space" width="100%" border="1" cellspacing="0" cellpadding="10">
+        <thead>
+            <th> S.No </th>
+            <th> VacancyId </th>
+            <th> Post </th>
+            <th> Subject </th>
+            <th> Location </th>
+            <th> Criteria </th>
+            <th> Experience </th>
+            <th> Mode </th>
+            <th> Vacancy </th>
+            <th> Salary  </th>
+            <th> AdvDate  </th>
+            <th> LastDate  </th>
+            <th> Apply </th>
+        </thead>
+        <tbody>
+            <% vacancyList.forEach((vacancy,index) => { %>
+                <tr>
+                    <td><%= index+1 %> </td>
+                    <td><%= vacancy.vacancyId %> </td>
+                    <td><%= vacancy.post %> </td>
+                    <td><%= vacancy.subject %> </td>
+                    <td><%= vacancy.location %> </td>
+                    <td><%= vacancy.criteria %> </td>
+                    <td><%= vacancy.experience %> </td>
+                    <td><%= vacancy.mode %> </td>
+                    <td><%= vacancy.vacancy %> </td>
+                    <td><%= vacancy.salary %> </td>
+                    <td><%= vacancy.advDate %> </td>
+                    <td><%= vacancy.lastDate %> </td>
+                    <td><a href="#">Apply</a></td>
+                   
+                </tr>
+                <% }); %>
+        </tbody>
+    </table>
+  <% } %>
+</body>

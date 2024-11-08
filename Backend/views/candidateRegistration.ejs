@@ -2,16 +2,16 @@
 <%- include('./homeHeader.ejs') %>
    <div id="loginbox">
         <center><h2> Candidate Registration </h2>
-        <form action="">
+        <form action="/candidate/candidateRegistration" method="post" enctype="multipart/form-data">
             <input type="text" id="input" placeholder="Enter Full Name" name="name"> <br>
-            <input type="email" id="input" placeholder="Enter Email" name="email"> <br>
+            <input type="email" id="input" placeholder="Enter Email" name="email_id"> <br>
             <input type="password" id="input" placeholder="Enter password" name="password"> <br>
             <span style="font-size: 17px;">Select Gender :</span>
             <input type="radio" id="male" value="Male" name="gender">
             <label for="male" style="font-size: 17px;">Male</label>
             <input type="radio" id="female" value="Female" name="gender">
             <label for="male" style="font-size: 17px;">Female</label>
-            <input type="date" id="input" name="date"> <br>
+            <input type="date" id="input" name="dob"> <br>
             <input type="text" id="input" name="contact" placeholder="Enter Mobile Number" maxlength="10">
             <textarea name="address" id="input" placeholder="Enter Address" rows="3" cols="39"></textarea>
             
@@ -37,7 +37,7 @@
             </select>
             <br>
             <span style="font-size: 17px;">Resume :</span>
-            <input type="file" id="file" name="file"> 
+            <input type="file" id="file" name="docs"> 
             <br>
          
             <input type="submit" id="inputbtn" value="Register" > <br>
