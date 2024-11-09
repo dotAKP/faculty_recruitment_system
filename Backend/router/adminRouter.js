@@ -14,7 +14,8 @@ const authenticateJWT = (req,res,next)=>{
    try{
       jwt.verify(token,admin_secret_key,(error,payload)=>{
          if(error){
-            res.render("adminLogin.ejs",{message:"Please Login First"});
+            // res.render("adminLogin.ejs",{message:"Please Login First"});
+            return res.status(401).json({message:"Please Login First"});
          }
          else {
             req.payload = payload;
@@ -22,18 +23,21 @@ const authenticateJWT = (req,res,next)=>{
          }
       });
    } catch(error){
-      res.render("adminLogin.ejs",{message: "something went wrong in JWT"});
+      // res.render("adminLogin.ejs",{message: "something went wrong in JWT"});
+    return  res.status(401).json({message: "something went wrong in JWT"});
    }
 }
 
 adminRouter.get('/', (req,res)=>{
-   res.render("adminLogin.ejs",{message:""});
+   // res.render("adminLogin.ejs",{message:""});
+   return res.status(200).json({message:""});
 });
 adminRouter.post("/adminLogin", adminLoginController);
 adminRouter.get("/adminLogout", adminLogoutController);
 
 adminRouter.get('/adminHome',authenticateJWT, (req,res)=>{
-   res.render("adminHome.ejs",{email:req.payload.email});
+   // res.render("adminHome.ejs",{email:req.payload.email});
+   return res.status(200).json({email:req.payload.email});
 });
 adminRouter.get('/adminRecruiterList',authenticateJWT,adminRecruiterListController);
 adminRouter.get('/adminCandidateList',authenticateJWT,adminCandidateListController);

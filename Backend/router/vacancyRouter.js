@@ -14,7 +14,8 @@ const authenticateJWT = (req,res,next)=>{
     try{
        jwt.verify(token,recruiter_secret_key,(error,payload)=>{
           if(error){
-             res.render("recruiterLogin.ejs",{message:"Please Login First"});
+            //  res.render("recruiterLogin.ejs",{message:"Please Login First"});
+             return res.status(200).json({message:"Please Login First"});
           }
           else {
              req.payload = payload;
@@ -22,7 +23,8 @@ const authenticateJWT = (req,res,next)=>{
           }
        });
     } catch(error){
-       res.render("recruiterLogin.ejs",{message: "something went wrong in JWT"});
+      //  res.render("recruiterLogin.ejs",{message: "something went wrong in JWT"});
+       return res.status(200).json({message: "something went wrong in JWT"});
     }
  }
 

@@ -13,7 +13,8 @@ const authenticateJWT = (req,res,next)=>{
     try{
        jwt.verify(token,candidate_secret_key,(error,payload)=>{
           if(error){
-             res.render("candidateLogin.ejs",{message:"Please Login First"});
+            //  res.render("candidateLogin.ejs",{message:"Please Login First"});
+             return res.status(200).json({message:"Please Login First"});
           }
           else {
              req.payload = payload;
@@ -21,7 +22,8 @@ const authenticateJWT = (req,res,next)=>{
           }
        });
     } catch(error){
-       res.render("candidateLogin.ejs",{message: "something went wrong in JWT"});
+      //  res.render("candidateLogin.ejs",{message: "something went wrong in JWT"});
+       return res.status(200).json({message: "something went wrong in JWT"});
     }
  }
  

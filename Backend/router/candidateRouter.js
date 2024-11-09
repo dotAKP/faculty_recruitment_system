@@ -14,7 +14,8 @@ const authenticateJWT = (req,res,next)=>{
    try{
       jwt.verify(token,candidate_secret_key,(error,payload)=>{
          if(error){
-            res.render("candidateLogin.ejs",{message:"Please Login First"});
+            // res.render("candidateLogin.ejs",{message:"Please Login First"});
+            return res.status(200).json({message:"Please Login First"});
          }
          else {
             req.payload = payload;
@@ -22,15 +23,18 @@ const authenticateJWT = (req,res,next)=>{
          }
       });
    } catch(error){
-      res.render("candidateLogin.ejs",{message: "something went wrong in JWT"});
+      // res.render("candidateLogin.ejs",{message: "something went wrong in JWT"});
+      return res.status(200).json({message: "something went wrong in JWT"});
    }
 }
 
 candidateRouter.get('/candidateLogin', (req,res)=>{
-   res.render("candidateLogin.ejs",{message :""});
+   // res.render("candidateLogin.ejs",{message :""});
+   return res.status(200).json({message :""});
 });
 candidateRouter.get('/candidateRegistration', (req,res)=>{
-    res.render("candidateRegistration.ejs");
+   //  res.render("candidateRegistration.ejs");
+    return res.status(200).json();
  });
 
  candidateRouter.post('/candidateRegistration', candidateRegistrationController);
@@ -40,7 +44,8 @@ candidateRouter.post('/candidateLogin', candidateLoginController);
 candidateRouter.get("/candidateLogout", candidateLogoutController);
 
 candidateRouter.get('/candidateHome',authenticateJWT, (req,res)=>{
-   res.render("candidateHome.ejs",{email:req.payload.email});
+   // res.render("candidateHome.ejs",{email:req.payload.email});
+   return res.status(200).json({email:req.payload.email});
 });
 candidateRouter.get('/candidateVacancyList',authenticateJWT,candidateVacancyListController);
 candidateRouter.get('/myStatus',authenticateJWT,myStatusController);

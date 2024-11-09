@@ -27,7 +27,8 @@ app.use(cookieParser());
  app.set("view engine","ejs");
 
 app.get('/',(req,res)=>{
-      res.render("home.ejs");
+      // res.render("home.ejs");
+      return res.status(200).json({msg : "API is Live"});
 });
 
 app.use("/admin", adminRouter); 

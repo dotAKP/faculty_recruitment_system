@@ -14,7 +14,8 @@ const authenticateJWT = (req,res,next)=>{
    try{
       jwt.verify(token,recruiter_secret_key,(error,payload)=>{
          if(error){
-            res.render("recruiterLogin.ejs",{message:"Please Login First"});
+            // res.render("recruiterLogin.ejs",{message:"Please Login First"});
+            return res.status(200).json({message:"Please Login First"});
          }
          else {
             req.payload = payload;
@@ -22,15 +23,18 @@ const authenticateJWT = (req,res,next)=>{
          }
       });
    } catch(error){
-      res.render("recruiterLogin.ejs",{message: "something went wrong in JWT"});
+      // res.render("recruiterLogin.ejs",{message: "something went wrong in JWT"});
+      return res.status(200).json({message: "something went wrong in JWT"});
    }
 }
 
 recruiterRouter.get('/recruiterLogin', (req,res)=>{
-   res.render("recruiterLogin.ejs",{message :""});
+   // res.render("recruiterLogin.ejs",{message :""});
+   return res.status(200).json({message :""});
 });
 recruiterRouter.get('/recruiterRegistration', (req,res)=>{
-    res.render("recruiterRegistration.ejs",{message:""});
+   //  res.render("recruiterRegistration.ejs",{message:""});
+    return res.status(200).json({message:""});
  });
  recruiterRouter.post('/recruiterRegistration',recruiterRegistrationController);
 
@@ -39,11 +43,13 @@ recruiterRouter.get('/recruiterRegistration', (req,res)=>{
  recruiterRouter.post('/recruiterLogin',recruiterLoginController);
 
  recruiterRouter.get('/recruiterHome',authenticateJWT, (req,res)=>{
-   res.render("recruiterHome.ejs",{email:req.payload.email});
+   // res.render("recruiterHome.ejs",{email:req.payload.email});
+   return res.status(200).json({email:req.payload.email});
 });
 recruiterRouter.get('/addVacancy',authenticateJWT,async (req,res)=>{
    const recruiterObj = await recruiterSchema.findOne({email : req.payload.email,});
-   res.render("addVacancy.ejs",{email : req.payload.email, recruiterObj : recruiterObj, message : ""});
+   // res.render("addVacancy.ejs",{email : req.payload.email, recruiterObj : recruiterObj, message : ""});
+   return res.status(200).json({email : req.payload.email, recruiterObj : recruiterObj, message : ""});
 });
 
 recruiterRouter.get('/vacancyPosted',authenticateJWT,recruiterVacancyPostedController);
