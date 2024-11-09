@@ -9,20 +9,23 @@ export const recruiterAddVacancyController = async (req,res)=>{
         vacancyObj.vacancyId = vacancyId;
         const recruiterObj = await recruiterSchema.findOne({email : req.payload.email});
         const result = await vacancySchema.create(vacancyObj);
-        console.log(result); 
+        // console.log(result); 
         
-        console.log(recruiterObj);
+        // console.log(recruiterObj);
         
         if(result)
         {
-            res.render("addVacancy.ejs",{email : req.payload.email, recruiterObj : recruiterObj,message : "Vacancy added Successfully"}); 
+            // res.render("addVacancy.ejs",{email : req.payload.email, recruiterObj : recruiterObj,message : "Vacancy added Successfully"}); 
+            return res.status(201).json({email : req.payload.email, recruiterObj : recruiterObj,message : "Vacancy added Successfully"});
         }
         else {
-            res.render("addVacancy.ejs",{email : req.payload.email, recruiterObj : recruiterObj, message : "Error while adding Vacancy"});
+            // res.render("addVacancy.ejs",{email : req.payload.email, recruiterObj : recruiterObj, message : "Error while adding Vacancy"});
+            return res.status(404).json({email : req.payload.email, recruiterObj : recruiterObj, message : "Error while adding Vacancy"});
         }
     } catch (error) {
         console.log("Error while recruiterAddVacancy : ", error);
         const recruiterObj = await recruiterSchema.findOne({email : req.payload.email,});
-        res.render("addVacancy.ejs",{email : req.payload.email, recruiterObj : recruiterObj, message : "Error while adding Vacancy"});
+        // res.render("addVacancy.ejs",{email : req.payload.email, recruiterObj : recruiterObj, message : "Error while adding Vacancy"});
+        return res.status(500).json({email : req.payload.email, recruiterObj : recruiterObj, message : "Error while adding Vacancy"});
     }
 }

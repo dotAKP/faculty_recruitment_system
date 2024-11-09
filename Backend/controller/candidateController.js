@@ -50,28 +50,34 @@ export const candidateRegistrationController = async (req,res)=>{
                 mailer.mailer(mailContent,email_id,async (info)=>{
                     if(info){
                             const result = await candidateSchema.create(obj);
-                            console.log("Result of candidate registration : ",result);
-                        res.render("candidateLogin.ejs",{message :"Email sent | Please verify"});
+                            // console.log("Result of candidate registration : ",result);
+                        // res.render("candidateLogin.ejs",{message :"Email sent | Please verify"});
+                        return res.status(201).json({message :"Email sent | Please verify"}); 
                     }
                     else{
-                        console.log("Error while sending Email");
-                        res.render("candidateRegistration.ejs",{message : "Error while sending Mail"});
+                        // console.log("Error while sending Email");
+                        // res.render("candidateRegistration.ejs",{message : "Error while sending Mail"});
+                        return res.status(400).json({message : "Error while sending Mail"});
                     }
             });
          }
       });
     } catch(error) {
         console.log("Error occured in candidate registration while uploading : ",error);
-        res.render("candidateRegistration.ejs",{message : "Error occured in candidate registration"});
+        // res.render("candidateRegistration.ejs",{message : "Error occured in candidate registration"});
+        return res.status(500).json({message : "Error occured in candidate registration"});
     }
  }
 
  export const candidateVerifyEmailController = async (req,res)=>{
     const email = req.query.email;
-    const updateStatus = {$set:{emailVerify:"verified"}};
+    const updateStatus = {
+        $set:{emailVerify:"verified"}
+                        };
     const updateResult = await candidateSchema.updateOne({ email_id : email},updateStatus);
-    console.log("Update Result : ",updateResult);
-    res.render("candidateLogin.ejs",{message : "Email Verified | Admin Verification takes 24 Hours"});
+    // console.log("Update Result : ",updateResult);
+    // res.render("candidateLogin.ejs",{message : "Email Verified | Admin Verification takes 24 Hours"});
+    return res.status(202).json({message : "Email Verified | Admin Verification takes 24 Hours"});
  }
 
  export  const candidateLoginController = async(req,res)=>{
@@ -89,24 +95,28 @@ export const candidateRegistrationController = async (req,res)=>{
             const token = jwt.sign({email:req.body.email},candidate_secret_key,expireTime);
 
             if(!token) {
-                res.render("candidateLogin.ejs",{message:"Error while setting up the token while candidate Login"});
+                // res.render("candidateLogin.ejs",{message:"Error while setting up the token while candidate Login"});
+                return res.status(401).json({message:"Error while setting up the token while candidate Login"});
             }
-            res.cookie('candidate_jwt_token',token,{maxAge:24*60*60*1000,httpOnly:true});
-            res.render("candidateHome.ejs",{email: req.body.email});
+            // res.cookie('candidate_jwt_token',token,{maxAge:24*60*60*1000,httpOnly:true});
+            // res.render("candidateHome.ejs",{email: req.body.email});
+            return res.status(201).cookie('candidate_jwt_token',token,{maxAge:24*60*60*1000,httpOnly:true}).json({email: req.body.email});
         }
         else {
-            res.render("candidateLogin.ejs",{message :"Email or Password is wrong"});
+            // res.render("candidateLogin.ejs",{message :"Email or Password is wrong"});
+            return res.status(401).json({message :"Email or Password is wrong"});
         }
     }catch(error){
         console.log("Error in candidateLogin : " ,error);
-        res.render("candidateLogin.ejs",{message :"Something went wrong"});
- 
+        // res.render("candidateLogin.ejs",{message :"Something went wrong"});
+        return res.status(500).json({message :"Something went wrong"});
     } 
 }
 
 export const candidateLogoutController = async (req,res)=>{
-    res.clearCookie('candidate_jwt_token');
-    res.render("candidateLogin.ejs",{message : "Candidate Logout Successfully"});
+    // res.clearCookie('candidate_jwt_token');
+    // res.render("candidateLogin.ejs",{message : "Candidate Logout Successfully"});
+    return res.status(202).clearCookie('candidate_jwt_token').json({message : "Candidate Logout Successfully"});
 }
 
 export const candidateVacancyListController = async (req,res)=>{
@@ -114,23 +124,28 @@ export const candidateVacancyListController = async (req,res)=>{
        const vacancyList = await vacancySchema.find();
        
         if(vacancyList.length == 0){
-            res.render("candidateVacancyList.ejs",{email : req.payload.email, vacancyList:vacancyList,message :"No Record Found !",status :[]});
+            // res.render("candidateVacancyList.ejs",{email : req.payload.email, vacancyList:vacancyList,message :"No Record Found !",status :[]});
+            return res.status(404).json({email : req.payload.email, vacancyList:vacancyList,message :"No Record Found !",status :[]});
         }
         else {
             const candidateVacancyRecord = await appliedVacancySchema.find({candidateEmail : req.payload.email});
             if(candidateVacancyRecord.length == 0)
             {
-                res.render("candidateVacancyList.ejs",{email : req.payload.email, vacancyList:vacancyList,message :"",status :[]});
+                // res.render("candidateVacancyList.ejs",{email : req.payload.email, vacancyList:vacancyList,message :"",status :[]});
+                return res.status(204).json({email : req.payload.email, vacancyList:vacancyList,message :"",status :[]});
             }
             else {
-            res.render("candidateVacancyList.ejs",{email : req.payload.email, vacancyList:vacancyList,message :"",status :candidateVacancyRecord});
-            }
+            // res.render("candidateVacancyList.ejs",{email : req.payload.email, vacancyList:vacancyList,message :"",status :candidateVacancyRecord});
+            return res.status(200).json({email : req.payload.email, vacancyList:vacancyList,message :"",status :candidateVacancyRecord});
+        }
         }
        
     } catch (error) {
         console.log("Error : ",error);
         const vacancyList = await vacancySchema.find();
-        res.render("candidateVacancyList.ejs",{email : req.payload.email, vacancyList:vacancyList,message :"Wait Data is loading",status :[]});
+        // res.render("candidateVacancyList.ejs",{email : req.payload.email, vacancyList:vacancyList,message :"Wait Data is loading",status :[]});
+        return res.status(500).json({email : req.payload.email, vacancyList:vacancyList,message :"Wait Data is loading",status :[]});
+
     }
 }
 
@@ -139,15 +154,18 @@ export const myStatusController = async (req,res)=>{
         const appliedVacancyList = await appliedVacancySchema.find({candidateEmail : req.payload.email});
         
          if(appliedVacancyList.length == 0){
-             res.render("myStatusList.ejs",{email : req.payload.email, appliedVacancyList:appliedVacancyList,message :"No Record Found !"});
-         }
+            //  res.render("myStatusList.ejs",{email : req.payload.email, appliedVacancyList:appliedVacancyList,message :"No Record Found !"});
+            return res.status(204).json({email : req.payload.email, appliedVacancyList:appliedVacancyList,message :"No Record Found !"});
+        }
          else {
-             res.render("myStatusList.ejs",{email : req.payload.email, appliedVacancyList:appliedVacancyList,message :""});
-         }
+            //  res.render("myStatusList.ejs",{email : req.payload.email, appliedVacancyList:appliedVacancyList,message :""});
+            return res.status(200).json({email : req.payload.email, appliedVacancyList:appliedVacancyList,message :""});
+        }
         
      } catch (error) {
          console.log("Error in myStatusController : ",error);
          const appliedVacancyList = await appliedVacancySchema.find({candidateEmail : req.payload.email});
-         res.render("myStatusList.ejs",{email : req.payload.email, appliedVacancyList:appliedVacancyList,message :"Wait Data is loading"});
-     }
+        //  res.render("myStatusList.ejs",{email : req.payload.email, appliedVacancyList:appliedVacancyList,message :"Wait Data is loading"});
+        return res.status(500).json({email : req.payload.email, appliedVacancyList:appliedVacancyList,message :"Wait Data is loading"});
+    }
 }

@@ -14,8 +14,8 @@ export const candidateAppliedVacancyController = async (req,res)=>{
         const status = await appliedVacancySchema.create(candidateData);
         // console.log(status);
         const candidateVacancyRecord = await appliedVacancySchema.find({candidateEmail : req.payload.email});
-         res.render("candidateVacancyList.ejs",{email : req.payload.email, vacancyList:vacancyList,message :"Successfully Applied", status :candidateVacancyRecord});
-  
+        //  res.render("candidateVacancyList.ejs",{email : req.payload.email, vacancyList:vacancyList,message :"Successfully Applied", status :candidateVacancyRecord});
+         return res.status(202).json({email : req.payload.email, vacancyList:vacancyList,message :"Successfully Applied", status :candidateVacancyRecord});  
     } catch (error) {
         console.log("Error", error);  
     }

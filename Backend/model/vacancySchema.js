@@ -1,7 +1,4 @@
 import mongoose from "mongoose";
-import url from "../database/connection.js";
-mongoose.connect(url);
-
 const VacancySchema = mongoose.Schema({
     vacancyId : {
         type : String,
