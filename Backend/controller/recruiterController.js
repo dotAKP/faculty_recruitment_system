@@ -2,8 +2,10 @@ import bcrypt from 'bcrypt';
 import mailer from '../router/mailer.js';
 import recruiterSchema from '../model/recruiterSchema.js';
 import vacancySchema from "../model/vacancySchema.js"
+import appliedVacancySchema from '../model/appliedVacancySchema.js';
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
+import candidateSchema from '../model/candidateSchema.js';
 dotenv.config();
 
 let recruiter_secret_key = process.env.RECRUITER_SECRET_KEY;
@@ -84,16 +86,16 @@ export const recruiterRegistrationController = async(req,res)=>{
        const vacancyList = await vacancySchema.find({email : req.payload.email});
        
         if(vacancyList.length == 0){
-            res.render("recruiterVacancyList",{email : req.payload.email, vacancyList:vacancyList,message :"No Record Found !"});
+            res.render("recruiterVacancyList.ejs",{email : req.payload.email, vacancyList:vacancyList,message :"No Record Found !"});
         }
         else {
-            res.render("recruiterVacancyList",{email : req.payload.email, vacancyList:vacancyList,message :""});
+            res.render("recruiterVacancyList.ejs",{email : req.payload.email, vacancyList:vacancyList,message :""});
         }
        
     } catch (error) {
         console.log("Error : ",error);
         const vacancyList = await vacancySchema.find({email : req.payload.email});
-        res.render("recruiterVacancyList",{email : req.payload.email, vacancyList:vacancyList,message :"Wait Data is loading"});
+        res.render("recruiterVacancyList.ejs",{email : req.payload.email, vacancyList:vacancyList,message :"Wait Data is loading"});
     }
 }
 
@@ -103,3 +105,72 @@ export const recruiterLogoutController = async (req,res)=>{
     res.render("recruiterLogin.ejs",{message : "Recruiter Logout Successfully"});
 }
 
+export const appliedCandidateListController = async (req,res)=>{
+    try { 
+        const appliedVacancyList = await appliedVacancySchema.find({recruiterEmail : req.payload.email});
+         
+        let result = [];
+        for(let i=0 ; i<appliedVacancyList.length; i++)
+        {
+            const candidateObj = await candidateSchema.findOne({email_id :appliedVacancyList[i].candidateEmail});
+            const filename = candidateObj.docs;
+            result.push(filename);
+        }
+
+         if(appliedVacancyList.length == 0){
+             res.render("appliedCandidateList.ejs",{email : req.payload.email, appliedVacancyList:appliedVacancyList,result:result,message :"No Record Found !"});
+         }
+         else {
+             res.render("appliedCandidateList.ejs",{email : req.payload.email, appliedVacancyList:appliedVacancyList,result:result,message :""});
+         }
+        
+     } catch (error) {
+         console.log("Error : ",error);
+         const appliedVacancyList = await appliedVacancySchema.find({recruiterEmail : req.payload.email});
+         let result = [];
+        for(let i=0 ; i<appliedVacancyList.length; i++)
+        {
+            const candidateObj = await candidateSchema.findOne({email_id :appliedVacancyList[i].candidateEmail});
+            const filename = candidateObj.docs;
+            result.push(filename);
+        }
+         res.render("appliedCandidateList.ejs",{email : req.payload.email, appliedVacancyList:appliedVacancyList,result:result,message :"Wait Data is loading"});
+     }
+}
+
+export const recruiterUpdateStatusController = async (req,res)=>{
+    try {
+        const receivedStatus = req.body.recruiterStatus;
+        const vacancyId = req.body.vacancyId;
+        const updateStatus = {
+            $set : {
+                recruiterStatus : receivedStatus
+            }
+        }
+      const status =  await appliedVacancySchema.updateOne({vacancyId : vacancyId},updateStatus);
+      // console.log(status);
+
+      const appliedVacancyList = await appliedVacancySchema.find({recruiterEmail : req.payload.email});
+      let result = [];
+      for(let i=0 ; i<appliedVacancyList.length; i++)
+      {
+          const candidateObj = await candidateSchema.findOne({email_id :appliedVacancyList[i].candidateEmail});
+          const filename = candidateObj.docs;
+          result.push(filename);
+      }
+
+      res.render("appliedCandidateList.ejs",{email : req.payload.email, appliedVacancyList:appliedVacancyList,result:result,message :"Status Updated"});
+    } catch (error) {
+       console.log("Error in recruiterUpdateStatusController :",error);
+       const appliedVacancyList = await appliedVacancySchema.find({recruiterEmail : req.payload.email});
+       let result = [];
+       for(let i=0 ; i<appliedVacancyList.length; i++)
+       {
+           const candidateObj = await candidateSchema.findOne({email_id :appliedVacancyList[i].candidateEmail});
+           const filename = candidateObj.docs;
+           result.push(filename);
+       }
+
+       res.render("appliedCandidateList.ejs",{email : req.payload.email, appliedVacancyList:appliedVacancyList,result:result,message :"Error while Updating Status"});
+    }
+}

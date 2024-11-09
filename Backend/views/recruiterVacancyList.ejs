@@ -42,8 +42,8 @@
                     <td><%= vacancy.mode %> </td>
                     <td><%= vacancy.vacancy %> </td>
                     <td><%= vacancy.salary %> </td>
-                    <td><%= vacancy.advDate %> </td>
-                    <td><%= vacancy.lastDate %> </td>
+                    <td><%= vacancy.advDate.toDateString() %> </td>
+                    <td><%= vacancy.lastDate.toDateString() %> </td>
                     <td><a href="#">Update</a></td>
                     <td><a href="#">Delete</a></td>
                 </tr>

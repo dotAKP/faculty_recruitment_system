@@ -2,7 +2,7 @@ import express from 'express';
 let candidateRouter = express.Router();
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
-import { candidateRegistrationController,candidateVerifyEmailController,candidateLoginController,candidateLogoutController,candidateVacancyListController } from '../controller/candidateController.js';
+import { candidateRegistrationController,candidateVerifyEmailController,candidateLoginController,candidateLogoutController,candidateVacancyListController,myStatusController } from '../controller/candidateController.js';
 
 candidateRouter.use(express.static('public'));
 dotenv.config();
@@ -43,5 +43,5 @@ candidateRouter.get('/candidateHome',authenticateJWT, (req,res)=>{
    res.render("candidateHome.ejs",{email:req.payload.email});
 });
 candidateRouter.get('/candidateVacancyList',authenticateJWT,candidateVacancyListController);
-
+candidateRouter.get('/myStatus',authenticateJWT,myStatusController);
 export default candidateRouter;

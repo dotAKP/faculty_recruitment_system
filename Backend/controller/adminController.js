@@ -2,7 +2,11 @@ import adminSchema from "../model/adminSchema.js";
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import recruiterSchema from "../model/recruiterSchema.js";
+import candidateSchema from "../model/candidateSchema.js";
+import vacancySchema from "../model/vacancySchema.js";
+import appliedVacancySchema from "../model/appliedVacancySchema.js";
 import dotenv from 'dotenv';
+
 dotenv.config();
 
 let admin_secret_key = process.env.ADMIN_SECRET_KEY;
@@ -49,6 +53,16 @@ export const adminRecruiterListController = async (req,res)=>{
     }
 }
 
+export const adminCandidateListController = async (req,res)=>{
+    try {
+       const candidateList = await candidateSchema.find();
+       res.render("adminCandidateList.ejs",{email : req.payload.email ,candidateList : candidateList,message :""});
+    } catch (error) {
+        console.log("Error at AdminCandidateListController");
+        res.render("adminHome.ejs",{email : req.payload.email});
+    }
+}
+
 export const adminVerifyRecruiterController = async (req,res)=>{
     try {
         const recruiterEmail = req.query.recruiterEmail;
@@ -69,3 +83,44 @@ export const adminVerifyRecruiterController = async (req,res)=>{
         res.render("adminRecruiterList.ejs",{email : req.payload.email ,recruiterList : recruiterList,message :"Error while updating Recruiter"});
     }
 }
+
+export const adminVerifyCandidateController = async (req,res)=>{
+    try {
+        const candidateEmail = req.query.candidateEmail;
+        const updateStatus = {
+            $set : {
+                adminVerify : "verified"
+            }
+        }
+        const updateResult = await candidateSchema.updateOne({email_id : candidateEmail},updateStatus);
+        console.log("UpdateResult : ",updateResult);
+        console.log("candidateEmail :",candidateEmail);
+        
+        const candidateList = await candidateSchema.find();
+        res.render("adminCandidateList.ejs",{email : req.payload.email ,candidateList : candidateList,message : candidateEmail +" Verified Successfully"});
+
+    } catch (error) {
+        console.log("Error at AdminVerifyCandidateController");
+        const candidateList = await candidateSchema.find();
+        res.render("adminCandidateList.ejs",{email : req.payload.email ,candidateList : candidateList,message :"Error while updating Candidate"});
+    }
+}
+
+export const adminVacancyListController = async (req,res)=>{
+    try { 
+       const vacancyList = await vacancySchema.find();
+       
+        if(vacancyList.length == 0){
+            res.render("adminVacancyList.ejs",{email : req.payload.email, vacancyList:vacancyList,message :"No Record Found !"});
+        }
+        else {
+            res.render("adminVacancyList.ejs",{email : req.payload.email, vacancyList:vacancyList,message :""});
+        }
+       
+    } catch (error) {
+        console.log("Error : ",error);
+        const vacancyList = await vacancySchema.find();
+        res.render("adminVacancyList.ejs",{email : req.payload.email, vacancyList:vacancyList,message :"Wait Data is loading"});
+    }
+}
+

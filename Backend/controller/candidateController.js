@@ -3,6 +3,7 @@ import bcrypt from 'bcrypt';
 import mailer from '../router/mailer.js';
 import candidateSchema from '../model/candidateSchema.js';
 import vacancySchema from '../model/vacancySchema.js';
+import appliedVacancySchema from '../model/appliedVacancySchema.js';
 import jwt from 'jsonwebtoken';
 import path from 'path';
 import {fileURLToPath} from 'url';
@@ -113,15 +114,40 @@ export const candidateVacancyListController = async (req,res)=>{
        const vacancyList = await vacancySchema.find();
        
         if(vacancyList.length == 0){
-            res.render("candidateVacancyList",{email : req.payload.email, vacancyList:vacancyList,message :"No Record Found !"});
+            res.render("candidateVacancyList.ejs",{email : req.payload.email, vacancyList:vacancyList,message :"No Record Found !",status :[]});
         }
         else {
-            res.render("candidateVacancyList",{email : req.payload.email, vacancyList:vacancyList,message :""});
+            const candidateVacancyRecord = await appliedVacancySchema.find({candidateEmail : req.payload.email});
+            if(candidateVacancyRecord.length == 0)
+            {
+                res.render("candidateVacancyList.ejs",{email : req.payload.email, vacancyList:vacancyList,message :"",status :[]});
+            }
+            else {
+            res.render("candidateVacancyList.ejs",{email : req.payload.email, vacancyList:vacancyList,message :"",status :candidateVacancyRecord});
+            }
         }
        
     } catch (error) {
         console.log("Error : ",error);
         const vacancyList = await vacancySchema.find();
-        res.render("candidateVacancyList",{email : req.payload.email, vacancyList:vacancyList,message :"Wait Data is loading"});
+        res.render("candidateVacancyList.ejs",{email : req.payload.email, vacancyList:vacancyList,message :"Wait Data is loading",status :[]});
     }
+}
+
+export const myStatusController = async (req,res)=>{
+    try { 
+        const appliedVacancyList = await appliedVacancySchema.find({candidateEmail : req.payload.email});
+        
+         if(appliedVacancyList.length == 0){
+             res.render("myStatusList.ejs",{email : req.payload.email, appliedVacancyList:appliedVacancyList,message :"No Record Found !"});
+         }
+         else {
+             res.render("myStatusList.ejs",{email : req.payload.email, appliedVacancyList:appliedVacancyList,message :""});
+         }
+        
+     } catch (error) {
+         console.log("Error in myStatusController : ",error);
+         const appliedVacancyList = await appliedVacancySchema.find({candidateEmail : req.payload.email});
+         res.render("myStatusList.ejs",{email : req.payload.email, appliedVacancyList:appliedVacancyList,message :"Wait Data is loading"});
+     }
 }

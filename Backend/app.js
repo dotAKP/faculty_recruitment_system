@@ -5,6 +5,7 @@ import adminRouter from './router/adminRouter.js';
 import candidateRouter from './router/candidateRouter.js';
 import recruiterRouter from './router/recruiterRouter.js';
 import vacancyRouter from './router/vacancyRouter.js';
+import appliedVacancyRouter from './router/appliedVacancyRouter.js';
 import cookieParser from 'cookie-parser';
 import expressFileUpload from 'express-fileupload';
  app.use(express.urlencoded({extended:true}));
@@ -23,9 +24,8 @@ app.get('/',(req,res)=>{
 app.use("/admin", adminRouter); 
 app.use("/candidate", candidateRouter); 
 app.use("/recruiter", recruiterRouter);
-app.use("/vacancy", vacancyRouter);  
-
-
+app.use("/vacancy", vacancyRouter);
+app.use("/appliedVacancy",appliedVacancyRouter);
 
 
 

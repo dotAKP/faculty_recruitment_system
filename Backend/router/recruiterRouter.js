@@ -1,7 +1,7 @@
 import express from 'express';
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
-import { recruiterRegistrationController, recruiterVerifyEmailController,recruiterLoginController,recruiterVacancyPostedController,recruiterLogoutController } from '../controller/recruiterController.js';
+import { recruiterRegistrationController, recruiterVerifyEmailController,recruiterLoginController,recruiterVacancyPostedController,recruiterLogoutController,appliedCandidateListController,recruiterUpdateStatusController } from '../controller/recruiterController.js';
 import recruiterSchema from '../model/recruiterSchema.js';
 let recruiterRouter = express.Router();
 recruiterRouter.use(express.static('public'));
@@ -49,5 +49,9 @@ recruiterRouter.get('/addVacancy',authenticateJWT,async (req,res)=>{
 recruiterRouter.get('/vacancyPosted',authenticateJWT,recruiterVacancyPostedController);
 
 recruiterRouter.get("/recruiterLogout", recruiterLogoutController);
+
+recruiterRouter.get('/appliedCandidateList',authenticateJWT,appliedCandidateListController);
+
+recruiterRouter.post('/recruiterUpdateStatus',authenticateJWT,recruiterUpdateStatusController);
 
 export default recruiterRouter;

@@ -1,5 +1,5 @@
 import express from 'express';
-import { adminLoginController,adminLogoutController,adminRecruiterListController,adminVerifyRecruiterController } from '../controller/adminController.js';
+import { adminLoginController,adminLogoutController,adminRecruiterListController,adminCandidateListController,adminVerifyRecruiterController,adminVerifyCandidateController,adminVacancyListController } from '../controller/adminController.js';
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
 let adminRouter = express.Router();
@@ -36,5 +36,10 @@ adminRouter.get('/adminHome',authenticateJWT, (req,res)=>{
    res.render("adminHome.ejs",{email:req.payload.email});
 });
 adminRouter.get('/adminRecruiterList',authenticateJWT,adminRecruiterListController);
+adminRouter.get('/adminCandidateList',authenticateJWT,adminCandidateListController);
 adminRouter.get('/adminVerifyRecruiter',authenticateJWT,adminVerifyRecruiterController);
+adminRouter.get('/adminVerifyCandidate',authenticateJWT,adminVerifyCandidateController);
+adminRouter.get('/adminVacancyList',authenticateJWT,adminVacancyListController);
+
+
 export default adminRouter;

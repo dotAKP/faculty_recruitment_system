@@ -1,8 +1,10 @@
-<%- include('./candidateHomeHeader.ejs') %>
+<%- include('./adminHomeHeader.ejs') %>
 
 <body >
     <br>
-    <center> <h2> Vacancy List</h2> </center>
+    <center>
+       <h2> Vacancy List </h2>
+    </center>
     <% if(message == "No Record Found !") { %>
        <br>
         <center> 
@@ -10,9 +12,6 @@
         </center>
         <br>
    <% } else { %>
-    <center> 
-        <span style="font-size: 20px; color: red;"> <%= message %></span>
-    </center>
     <table id="space" width="100%" border="1" cellspacing="0" cellpadding="10">
         <thead>
             <th> S.No </th>
@@ -27,18 +26,12 @@
             <th> Salary  </th>
             <th> AdvDate  </th>
             <th> LastDate  </th>
-            <th> Recruiter </th>
-            <th> Apply </th>
+            <th> Email </th>
+            <th> Recruiter  </th>
+            <th> Name  </th>
         </thead>
         <tbody>
-            <% vacancyList.forEach((vacancy,index) => {
-                let obj = {
-                    vacancyId : vacancy.vacancyId,
-                    candidateEmail : email,
-                    recruiterEmail : vacancy.email,
-                    post : vacancy.post,
-                }
-                %>
+            <% vacancyList.forEach((vacancy,index) => { %>
                 <tr>
                     <td><%= index+1 %> </td>
                     <td><%= vacancy.vacancyId %> </td>
@@ -53,16 +46,9 @@
                     <td><%= vacancy.advDate.toDateString() %> </td>
                     <td><%= vacancy.lastDate.toDateString() %> </td>
                     <td><%= vacancy.email %> </td>
-                    <td>
-                        <% if(status.some((obj)=>obj.vacancyId==vacancy.vacancyId && obj.candidateEmail == email)) { %>
-                            <center> 
-                                  <span style="font-size: 20px; color: red;"> Applied </span>
-                             </center>
-                        <% } else {%>
-                         <a href="/appliedVacancy/candidateAppliedVacancy?data=<%=JSON.stringify(obj)%>">Apply</a>
-                         <%}%>
-                    </td>
-                </tr>   
+                    <td><%= vacancy.recruiter %> </td>
+                    <td><%= vacancy.name %> </td>
+                </tr>
                 <% }); %>
         </tbody>
     </table>
