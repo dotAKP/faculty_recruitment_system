@@ -3,8 +3,9 @@ import Home from "./Home"
 import AdminLogin from "./AdminLogin"
 import CandidateLogin from "./CandidateLogin"
 import CandidateRegistration from "./CandidateRegistration"
-
-
+import RecruiterLogin from "./RecruiterLogin"
+import RecruiterRegistration from "./RecruiterRegistration"
+import AdminCandidate from "./AdminCandidate"
 
 
 
@@ -25,6 +26,18 @@ export default function Body() {
         {
             path:'/candidateRegistration',
             element:<CandidateRegistration/>
+        },
+        {
+            path:'/recruiterRegistration',
+            element:<RecruiterRegistration/>
+        },
+        {
+            path:'/recruiterLogin',
+            element:<RecruiterLogin/>
+        },
+        {
+            path:'/adminCandidate',
+            element:<AdminCandidate/>
         }
     ])
 

@@ -1,9 +1,33 @@
-import React from 'react'
+import React ,{useState}from 'react'
 
 export default function CandidateRegistration() {
+
+   const [formData, setFormData] = useState({
+    name : '',
+    email_id : '',
+    password : '',
+    gender : '',
+    dob : '',
+    address : '',
+    contact : '',
+    qualification : '',
+    percentage : '',
+    experience : '',
+   })
+
+   function changeHandler(event) {
+        const {name, value} = event.target;
+        setFormData({...formData, [name] : value});
+   }
+
+   function submitHandler(event) {
+    event.preventDefault();
+    console.log(formData);
+   }
+
     return (
         <div className='p-10 bg-neutral-500 min-h-screen px-20'>
-            <div className='bg-white p-4 rounded-lg border-black border-2'>
+            <form className='bg-white p-4 rounded-lg border-black border-2' onSubmit={submitHandler}>
                 <div className='px-10 py-4 flex justify-center my-10'>
                     <h1 className='text-4xl font-bold'>Candiate Registration Form</h1>
                 </div>
@@ -20,6 +44,9 @@ export default function CandidateRegistration() {
                             <div className='mt-5'>
                                 <h1 className='text-blue-600 font-semibold text-lg'>Name</h1>
                                 <input type="text"
+                                name='name'
+                                value={formData.name}
+                                onChange={changeHandler}
                                     placeholder='Enter Full Name'
                                     className='p-2 border-2 border-blue-400  text-lg px-10 py-4 rounded-lg bg-neutral-100 outline-none'
                                 />
@@ -30,6 +57,9 @@ export default function CandidateRegistration() {
                             <div className='mt-5'>
                                 <h1 className='text-blue-600 font-semibold text-lg'>Email</h1>
                                 <input type="text"
+                                value={formData.email_id}
+                                onChange={changeHandler}
+                                name='email_id'
                                     placeholder='Enter email'
                                     className='p-2 border-2 border-blue-400  text-lg px-10 py-4 rounded-lg bg-neutral-100 outline-none'
                                 />
@@ -39,6 +69,9 @@ export default function CandidateRegistration() {
                             <div className='mt-5'>
                                 <h1 className='text-blue-600 font-semibold text-lg'>Password</h1>
                                 <input type="password"
+                                value={formData.password}
+                                onChange={changeHandler}
+                                name='password'
                                     placeholder='Enter Password'
                                     className='p-2 border-2 border-blue-400  text-lg px-10 py-4 rounded-lg bg-neutral-100 outline-none'
                                 />
@@ -53,6 +86,9 @@ export default function CandidateRegistration() {
                             <div className='mt-5'>
                                 <h1 className='text-blue-600 font-semibold text-lg'>Date</h1>
                                 <input type="date"
+                                value={formData.dob}
+                                onChange={changeHandler}
+                                name='dob'
                                     placeholder='DOB'
                                     className='p-2 border-2 border-blue-400  text-lg px-12 py-4 rounded-lg bg-neutral-100 outline-none'
                                 />
@@ -62,6 +98,9 @@ export default function CandidateRegistration() {
                             <div className='mt-5'>
                                 <h1 className='text-blue-600 font-semibold text-lg'>Gender</h1>
                                 <select
+                                value={formData.gender}
+                                onChange={changeHandler}
+                                name='gender'
                                     className='p-2  border-2 border-blue-400  text-lg px-14 py-4 rounded-lg bg-neutral-100 outline-none'
 
                                 >
@@ -91,6 +130,9 @@ export default function CandidateRegistration() {
                         <div className='mt-5'>
                             <h1 className='text-blue-600 font-semibold text-lg'>Qualifications</h1>
                             <select
+                            value={formData.qualification}
+                            onChange={changeHandler}
+                            name='qualification'
                                 className='p-2  border-2 border-blue-400  text-lg px-14 py-4 rounded-lg bg-neutral-100 outline-none'
 
                             >
@@ -109,6 +151,9 @@ export default function CandidateRegistration() {
                             <div className='mt-5'>
                                 <h1 className='text-blue-600 font-semibold text-lg'>Percentage</h1>
                                 <input type="text"
+                                value={formData.percentage}
+                                onChange={changeHandler}
+                                name='percentage'
                                     placeholder='Enter Percentage'
                                     className='p-2 border-2 border-blue-400  text-lg px-10 py-4 rounded-lg bg-neutral-100 outline-none'
                                 />
@@ -119,6 +164,9 @@ export default function CandidateRegistration() {
                     <div className='mt-5'>
                         <h1 className='text-blue-600 font-semibold text-lg'>Experiances</h1>
                         <select
+                        value={formData.experience}
+                        onChange={changeHandler}
+                        name='experience'
                             className='p-2  border-2 border-blue-400  text-lg px-14 py-4 rounded-lg bg-neutral-100 outline-none'
 
                         >
@@ -151,6 +199,9 @@ export default function CandidateRegistration() {
                         <div className='mt-5'>
                             <h1 className='text-blue-600 font-semibold text-lg'>Address</h1>
                             <textarea type="text"
+                            value={formData.address}
+                            onChange={changeHandler}
+                            name='address'
                                 placeholder='Enter Address'
                                 className='p-2 border-2 border-blue-400  text-lg px-10 py-4 rounded-lg bg-neutral-100 outline-none'
                             />
@@ -161,6 +212,9 @@ export default function CandidateRegistration() {
                         <div className='mt-5'>
                             <h1 className='text-blue-600 font-semibold text-lg'>Mobile Number</h1>
                             <input type="number"
+                            value={formData.contact}
+                            onChange={changeHandler}
+                            name='contact'
                                 placeholder='Enter Mobile No'
                                 className='p-2 border-2 border-blue-400  text-lg px-10 py-4 rounded-lg bg-neutral-100 outline-none'
                             />
@@ -177,7 +231,7 @@ export default function CandidateRegistration() {
                     <button className='bg-black text-white font-bold text-lg rounded-lg px-14 py-4'>Submit</button>
                 </div>
 
-            </div>
+            </form>
         </div>
 
     )
