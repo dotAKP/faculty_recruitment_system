@@ -8,6 +8,7 @@ import vacancyRouter from './router/vacancyRouter.js';
 import appliedVacancyRouter from './router/appliedVacancyRouter.js';
 import cookieParser from 'cookie-parser';
 import expressFileUpload from 'express-fileupload';
+import cors from 'cors' ;
 import dotenv from 'dotenv';
 dotenv.config();
 async function mongoDB_connect (){
@@ -22,6 +23,7 @@ async function mongoDB_connect (){
  app.use(express.static('public'));
  app.use(expressFileUpload());
 app.use(cookieParser());
+app.use(cors());
 
  app.set("views","views");
  app.set("view engine","ejs");
