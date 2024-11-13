@@ -58,7 +58,7 @@ export default function RecruiterPostedVacancy() {
                         <th className='border-2 border-black  py-6 text-lg font-extrabold'>Experiance</th>
                         <th className='border-2 border-black  py-6 text-lg font-extrabold'>Adv Date</th>
                         <th className='border-2 border-black  py-6 text-lg font-extrabold'>Last Date</th>
-                        <th className='border-2 border-black  py-6 text-lg font-extrabold'>Apply</th>
+
                     </thead>
                     <tbody>
                         {

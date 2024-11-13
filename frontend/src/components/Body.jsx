@@ -13,6 +13,7 @@ import CandidateVacancy from "./CandidateVacancy"
 import CandidateMyStatus from "./CandidateMyStatus"
 import RecruiterAddVacancy from "./RecruiterAddVacancy"
 import RecruiterPostedVacancy from "./RecruiterPostedVacancy"
+import RecruiterAppliedCandidate from "./RecruiterAppliedCandidate"
 
 
 export default function Body() {
@@ -68,6 +69,10 @@ export default function Body() {
         {
             path:'/recruiterPostedVacancy',
             element:<RecruiterPostedVacancy/>
+        },
+        {
+            path:'/recruiterAppliedCandidate',
+            element:<RecruiterAppliedCandidate/>
         }
     ])
 
