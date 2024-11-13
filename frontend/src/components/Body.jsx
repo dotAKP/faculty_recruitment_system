@@ -7,6 +7,8 @@ import RecruiterLogin from "./RecruiterLogin"
 import RecruiterRegistration from "./RecruiterRegistration"
 import AdminCandidate from "./AdminCandidate"
 import AdminRecruiter from "./AdminRecruiter"
+import AdminVacancy from "./AdminVacancy"
+import AdminHome from "./AdminHome"
 
 
 
@@ -35,6 +37,9 @@ export default function Body() {
         {
             path:'/recruiterLogin',
             element:<RecruiterLogin/>
+        },{
+            path:'/adminHome',
+            element:<AdminHome/>
         },
         {
             path:'/adminCandidate',
@@ -43,12 +48,15 @@ export default function Body() {
         {
             path:'/adminRecruiter',
             element:<AdminRecruiter/>
+        },{
+            path:'/adminVacancy',
+            element:<AdminVacancy/>
         }
     ])
 
 
     return (
-        <div>
+        <div className="">
             <RouterProvider router={appRouter}/>
         </div>
     )
