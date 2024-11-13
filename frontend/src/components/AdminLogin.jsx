@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-
+import axios from 'axios';
 export default function AdminLogin() {
 
     const [formData, setFormData] = useState({
@@ -18,6 +18,27 @@ export default function AdminLogin() {
        event.preventDefault();
 
        console.log(formData);
+
+       async function loginHandler() {
+           try {
+            const res = await axios.post("http://localhost:8080/admin/adminLogin",{
+                email:formData.email,
+                password:formData.password
+            },{
+                headers:{
+                    'Content-Type' : 'Application/json'
+                },
+
+                withCredentials:true
+            });
+
+            console.log(res);
+           } catch (error) {
+            console.log(error);
+           }
+       }
+
+       loginHandler();
     }
 
 
