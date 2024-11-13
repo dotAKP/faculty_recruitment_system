@@ -6,6 +6,7 @@ import CandidateRegistration from "./CandidateRegistration"
 import RecruiterLogin from "./RecruiterLogin"
 import RecruiterRegistration from "./RecruiterRegistration"
 import AdminCandidate from "./AdminCandidate"
+import AdminRecruiter from "./AdminRecruiter"
 
 
 
@@ -38,6 +39,10 @@ export default function Body() {
         {
             path:'/adminCandidate',
             element:<AdminCandidate/>
+        },
+        {
+            path:'/adminRecruiter',
+            element:<AdminRecruiter/>
         }
     ])
 
