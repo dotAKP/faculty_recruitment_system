@@ -9,7 +9,8 @@ import AdminCandidate from "./AdminCandidate"
 import AdminRecruiter from "./AdminRecruiter"
 import AdminVacancy from "./AdminVacancy"
 import AdminHome from "./AdminHome"
-
+import CandidateVacancy from "./CandidateVacancy"
+import CandidateMyStatus from "./CandidateMyStatus"
 
 
 export default function Body() {
@@ -51,6 +52,12 @@ export default function Body() {
         },{
             path:'/adminVacancy',
             element:<AdminVacancy/>
+        },{
+            path:'/candidateVacancy',
+            element:<CandidateVacancy/>
+        },{
+            path:'/candidateMyStatus',
+            element:<CandidateMyStatus/>
         }
     ])
 

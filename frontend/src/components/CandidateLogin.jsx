@@ -1,5 +1,5 @@
 import React,{useState} from 'react'
-
+import axios from 'axios';
 export default function CandidateLogin() {
 
 
@@ -19,6 +19,27 @@ export default function CandidateLogin() {
        event.preventDefault();
 
        console.log(formData);
+       async function loginHandler() {
+        try {
+         const res = await axios.post("http://localhost:8080/candidate/candidateLogin",{
+             email:formData.email,
+             password:formData.password
+         },{
+             headers:{
+                 'Content-Type' : 'Application/json'
+             },
+
+             withCredentials:true
+         });
+
+         console.log(res);
+        } catch (error) {
+         console.log(error);
+        }
+    }
+
+    loginHandler();
+
     }
 
 
