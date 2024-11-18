@@ -5,7 +5,7 @@ import toast from 'react-hot-toast';
 export default function AdminCandidate() {
 
     const [candidateList, setCandidateList] = useState([]);
-
+    const [render , setRender] = useState(false);
     useEffect(() => {
 
         async function fetchData() {
@@ -28,7 +28,7 @@ export default function AdminCandidate() {
         fetchData();
 
 
-    }, [])
+    }, [render])
 
 
 
@@ -73,7 +73,7 @@ export default function AdminCandidate() {
                                     async function apiCall(){
                                        try {
                                         
-                                        const response = await axios.get(`http://localhost:8080/admin/adminVerifyCandidate?candidateEmail=${item.emai_id}`,{
+                                        const response = await axios.get(`http://localhost:8080/admin/adminVerifyCandidate?candidateEmail=${item.email_id}`,{
                                             headers:{
                                                 'Content-Type':'Application/json'
                                             },
@@ -81,6 +81,7 @@ export default function AdminCandidate() {
                                         });
                                         console.log(response);
                                         toast.success('Candidate Verify Successfully');
+                                        setRender(!render);
                                        } catch (error) {
                                         console.log(error);
                                        }

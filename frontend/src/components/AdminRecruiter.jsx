@@ -5,7 +5,7 @@ import toast from 'react-hot-toast'
 export default function AdminRecruiter() {
 
     const [recruiterList, setRecruiterList] = useState([]);
-
+    const [render, setRender] = useState(false);
     useEffect(() => {
 
         async function fetchData() {
@@ -28,7 +28,7 @@ export default function AdminRecruiter() {
         fetchData();
 
 
-    }, [])
+    }, [render])
 
 
 
@@ -67,7 +67,7 @@ export default function AdminRecruiter() {
                                     async function apiCall(){
                                        try {
                                         
-                                        const response = await axios.get(`http://localhost:8080/admin/adminVerifyRecruiter?recruiterEmail=${item.emai_id}`,{
+                                        const response = await axios.get(`http://localhost:8080/admin/adminVerifyRecruiter?recruiterEmail=${item.email}`,{
                                             headers:{
                                                 'Content-Type':'Application/json'
                                             },
@@ -75,7 +75,9 @@ export default function AdminRecruiter() {
                                         });
                                         console.log(response);
                                         toast.success('Recruiter Verify Successfully');
+                                        setRender(!render);
                                        } catch (error) {
+                                        toast.error('Internal Server Occured');
                                         console.log(error);
                                        }
                                     }

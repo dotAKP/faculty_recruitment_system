@@ -1,4 +1,6 @@
+import axios from 'axios';
 import React, { useState } from 'react'
+import toast from 'react-hot-toast';
 
 export default function RecruiterRegistration() {
 
@@ -20,6 +22,25 @@ export default function RecruiterRegistration() {
    function submitHandler(event) {
         event.preventDefault();
     console.log(formData);
+   
+        async function registerRecruiter() {
+            try {
+                const response = await axios.post("http://localhost:8080/recruiter/recruiterRegistration",formData,{
+                    headers:{
+                        'Content-Type':'Application/json'
+                    },
+                    withCredentials : true
+                });
+
+                console.log(response);
+                toast.success('Please Verify your Email');
+                
+            } catch (error) {
+                console.log(error);
+            }
+        }
+        registerRecruiter();
+    
    }
 
 
@@ -42,38 +63,38 @@ export default function RecruiterRegistration() {
                     <div>
                         <div>
                             <div className='mt-5'>
-                                <h1 className='text-blue-600 font-semibold text-lg'>Name</h1>
+                                <h1 className='text-black font-semibold text-lg'>Name</h1>
                                 <input type="text"
                                 name='name'
                                 value={formData.name}
                                 onChange={changeHandler}
                                     placeholder='Enter Full Name'
-                                    className='p-2 border-2 border-blue-400  text-lg px-10 py-4 rounded-lg bg-neutral-100 outline-none'
+                                    className='p-2 border-2 border-neutral-500  text-lg px-10 py-4 rounded-lg bg-neutral-100 outline-none'
                                 />
                             </div>
                         </div>
 
                         <div>
                             <div className='mt-5'>
-                                <h1 className='text-blue-600 font-semibold text-lg'>Email</h1>
+                                <h1 className='text-black font-semibold text-lg'>Email</h1>
                                 <input type="text"
                                 name='email'
                                 value={formData.email}
                                 onChange={changeHandler}
                                     placeholder='Enter email'
-                                    className='p-2 border-2 border-blue-400  text-lg px-10 py-4 rounded-lg bg-neutral-100 outline-none'
+                                    className='p-2 border-2 border-neutral-500  text-lg px-10 py-4 rounded-lg bg-neutral-100 outline-none'
                                 />
                             </div>
                         </div>
                         <div>
                             <div className='mt-5'>
-                                <h1 className='text-blue-600 font-semibold text-lg'>Password</h1>
+                                <h1 className='text-black font-semibold text-lg'>Password</h1>
                                 <input type="password"
                                 name='password'
                                 value={formData.password}
                                 onChange={changeHandler}
                                     placeholder='Enter Password'
-                                    className='p-2 border-2 border-blue-400  text-lg px-10 py-4 rounded-lg bg-neutral-100 outline-none'
+                                    className='p-2 border-2 border-neutral-500  text-lg px-10 py-4 rounded-lg bg-neutral-100 outline-none'
                                 />
                             </div>
                         </div>
@@ -83,10 +104,10 @@ export default function RecruiterRegistration() {
 
                     <div>
                         <div className='mt-5'>
-                            <h1 className='text-blue-600 font-semibold text-lg'>Recruiter Type</h1>
+                            <h1 className='text-black font-semibold text-lg'>Recruiter Type</h1>
                             <select
                                 name='recruiter'
-                                className='p-2  border-2 border-blue-400  text-lg px-14 py-4 rounded-lg bg-neutral-100 outline-none'
+                                className='p-2  border-2 border-neutral-500  text-lg px-14 py-4 rounded-lg bg-neutral-100 outline-none'
                                 value={formData.recruiter}
                                 onChange={changeHandler}
                             >
@@ -114,26 +135,26 @@ export default function RecruiterRegistration() {
 
                     <div>
                         <div className='mt-5'>
-                            <h1 className='text-blue-600 font-semibold text-lg'>Address</h1>
+                            <h1 className='text-black font-semibold text-lg'>Address</h1>
                             <textarea type="text"
                             name='address'
                             value={formData.address}
                             onChange={changeHandler}
                                 placeholder='Enter Address'
-                                className='p-2 border-2 border-blue-400  text-lg px-10 py-4 rounded-lg bg-neutral-100 outline-none'
+                                className='p-2 border-2 border-neutral-500  text-lg px-10 py-4 rounded-lg bg-neutral-100 outline-none'
                             />
                         </div>
                     </div>
 
                     <div>
                         <div className='mt-5'>
-                            <h1 className='text-blue-600 font-semibold text-lg'>Mobile Number</h1>
+                            <h1 className='text-black font-semibold text-lg'>Mobile Number</h1>
                             <input type="number"
                             name='contact'
                             value={formData.contact}
                             onChange={changeHandler}
                                 placeholder='Enter Mobile No'
-                                className='p-2 border-2 border-blue-400  text-lg px-10 py-4 rounded-lg bg-neutral-100 outline-none'
+                                className='p-2 border-2 border-neutral-500  text-lg px-10 py-4 rounded-lg bg-neutral-100 outline-none'
                             />
                         </div>
                     </div>

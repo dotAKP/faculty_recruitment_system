@@ -12,6 +12,7 @@ export default function RecruiterAppliedCandidate() {
         vacancyId: '',
         recruiterStatus: ''
     });
+    const [render,setRender] = useState(false);
 
     useEffect(() => {
 
@@ -36,7 +37,7 @@ export default function RecruiterAppliedCandidate() {
         fetchData();
 
 
-    }, [])
+    }, [render])
 
     function changeHandler(e) {
         const { name, value } = e.target;
@@ -51,7 +52,7 @@ export default function RecruiterAppliedCandidate() {
                 <table className='w-[100%] '>
                     <thead className='border-2 border-black w-[100%] bg-neutral-200'>
                         <th className='border-2 border-black  py-6 text-xl font-extrabold'>S.no</th>
-                        <th className='border-2 border-black  py-6 text-lgfont-extrabold'>Applied Id</th>
+                        <th className='border-2 border-black  py-6 text-lg font-extrabold'>Applied Id</th>
                         <th className='border-2 border-black py-6 text-lg font-extrabold'>Vacancy Id</th>
                         <th className='border-2 border-black py-6 text-lg font-extrabold w-[8%]'>Recruiter Email</th>
                         <th className='border-2 border-black  py-6 text-lg font-extrabold'>Post</th>
@@ -72,9 +73,10 @@ export default function RecruiterAppliedCandidate() {
                                 <td className='border-2 border-black px-4  py-4 font-semibold'>
                                     <select
                                         name='recruiterStatus'
-                                        value={formData.recruiterStatus}
+                                        
+                                      
                                         onChange={changeHandler}
-                                        className={`${formData.recruiterStatus == 'Shortlisted' ? 'text-green-500' : 'text-red-600'} outline-none border-2 border-black ml-2 mt-2 text-lg p-2`}>
+                                        className={`${item.recruiterStatus == 'Shortlisted' ? 'text-green-500' : 'text-red-600'} outline-none border-2 border-black ml-2 mt-2 text-lg p-2`}>
                                         <option value={`${item.recruiterStatus}`}>{item.recruiterStatus}</option>
                                         <option value="Shortlisted" ><div className='text-green-600'>Shortlisted</div></option>
                                         <option value="BetterLuckNextTime"><div className='text-red-600'>Better Luck Next Time</div></option>
@@ -101,7 +103,7 @@ export default function RecruiterAppliedCandidate() {
 
                                                     console.log(res);
                                                     toast.success('Recruiter Status Updated Successfully');
-                                                    
+                                                    setRender(!render);
                                                 } catch (error) {
                                                     console.log(error);
                                                 }

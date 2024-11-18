@@ -72,25 +72,25 @@ export default function RecruiterAddVacancy() {
                     <div>
                         <div>
                             <div className='mt-5'>
-                                <h1 className='text-blue-600 font-semibold text-lg'>Post</h1>
+                                <h1 className='text-black font-semibold text-lg'>Post</h1>
                                 <input type="text"
                                 required
                                     name='post'
                                     value={formData.post}
                                     onChange={changeHandler}
                                     placeholder='Enter Post'
-                                    className='p-2 border-2 border-blue-400  text-lg px-10 py-4 rounded-lg bg-neutral-100 outline-none'
+                                    className='p-2 border-2 border-neutral-500  text-lg px-10 py-4 rounded-lg bg-neutral-100 outline-none'
                                 />
                             </div>
                         </div>
 
                         <div>
                             <div className='mt-5'>
-                                <h1 className='text-blue-600 font-semibold text-lg'>Subject</h1>
+                                <h1 className='text-black font-semibold text-lg'>Subject</h1>
                                 {!subjectToggle ? <select
                                     required
                                     name='subject'
-                                    className='p-2  border-2 border-blue-400  text-lg px-14 py-4 rounded-lg bg-neutral-100 outline-none'
+                                    className='p-2  border-2 border-neutral-500  text-lg px-14 py-4 rounded-lg bg-neutral-100 outline-none'
                                     value={formData.subject}
                                     onChange={changeHandler}
                                 >
@@ -110,7 +110,7 @@ export default function RecruiterAddVacancy() {
                                             value={formData.subject}
                                             onChange={changeHandler}
                                             placeholder='Enter Post'
-                                            className='p-2 border-2 border-blue-400  text-lg px-10 py-4 rounded-lg bg-neutral-100 outline-none'
+                                            className='p-2 border-2 border-neutral-500  text-lg px-10 py-4 rounded-lg bg-neutral-100 outline-none'
                                         />
                                     </div>
                                 }
@@ -118,24 +118,24 @@ export default function RecruiterAddVacancy() {
                         </div>
                         <div>
                             <div className='mt-5'>
-                                <h1 className='text-blue-600 font-semibold text-lg'>Location</h1>
+                                <h1 className='text-black font-semibold text-lg'>Location</h1>
                                 <input type="text"
                                 required
                                     name='location'
                                     value={formData.location}
                                     onChange={changeHandler}
                                     placeholder='Enter Password'
-                                    className='p-2 border-2 border-blue-400  text-lg px-10 py-4 rounded-lg bg-neutral-100 outline-none'
+                                    className='p-2 border-2 border-neutral-500  text-lg px-10 py-4 rounded-lg bg-neutral-100 outline-none'
                                 />
                             </div>
                         </div>
 
                         <div className='mt-5'>
-                            <h1 className='text-blue-600 font-semibold text-lg'>Criteria</h1>
+                            <h1 className='text-black font-semibold text-lg'>Criteria</h1>
                             <select
                                 name='criteria'
                                 required
-                                className='p-2  border-2 border-blue-400  text-lg px-14 py-4 rounded-lg bg-neutral-100 outline-none'
+                                className='p-2  border-2 border-neutral-500  text-lg px-14 py-4 rounded-lg bg-neutral-100 outline-none'
                                 value={formData.criteria}
                                 onChange={changeHandler}
                             >
@@ -150,11 +150,11 @@ export default function RecruiterAddVacancy() {
                     <div>
 
                         <div className='mt-5'>
-                            <h1 className='text-blue-600 font-semibold text-lg'>Experience</h1>
+                            <h1 className='text-black font-semibold text-lg'>Experience</h1>
                             <select
                                 name='experience'
                                 required
-                                className='p-2  border-2 border-blue-400  text-lg px-14 py-4 rounded-lg bg-neutral-100 outline-none'
+                                className='p-2  border-2 border-neutral-500  text-lg px-14 py-4 rounded-lg bg-neutral-100 outline-none'
                                 value={formData.experience}
                                 onChange={changeHandler}
                             >
@@ -169,10 +169,10 @@ export default function RecruiterAddVacancy() {
                         </div>
 
                         <div className='mt-5'>
-                            <h1 className='text-blue-600 font-semibold text-lg'>Mode</h1>
+                            <h1 className='text-black font-semibold text-lg'>Mode</h1>
                             <select required
                                 name='mode'
-                                className='p-2  border-2 border-blue-400  text-lg px-14 py-4 rounded-lg bg-neutral-100 outline-none'
+                                className='p-2  border-2 border-neutral-500  text-lg px-14 py-4 rounded-lg bg-neutral-100 outline-none'
                                 value={formData.mode}
                                 onChange={changeHandler}
                             >
@@ -186,28 +186,28 @@ export default function RecruiterAddVacancy() {
 
                         <div>
                             <div className='mt-5'>
-                                <h1 className='text-blue-600 font-semibold text-lg'>Vacancy</h1>
+                                <h1 className='text-black font-semibold text-lg'>Vacancy</h1>
                                 <input type="text"
                                 required
                                     name='vacancy'
                                     value={formData.vacancy}
                                     onChange={changeHandler}
                                     placeholder='Enter Password'
-                                    className='p-2 border-2 border-blue-400  text-lg px-10 py-4 rounded-lg bg-neutral-100 outline-none'
+                                    className='p-2 border-2 border-neutral-500  text-lg px-10 py-4 rounded-lg bg-neutral-100 outline-none'
                                 />
                             </div>
                         </div>
 
                         <div>
                             <div className='mt-5'>
-                                <h1 className='text-blue-600 font-semibold text-lg'>Salary</h1>
+                                <h1 className='text-black font-semibold text-lg'>Salary</h1>
                                 <input type="text"
                                     name='salary'
                                     required
                                     value={formData.salary}
                                     onChange={changeHandler}
                                     placeholder='Enter Password'
-                                    className='p-2 border-2 border-blue-400  text-lg px-10 py-4 rounded-lg bg-neutral-100 outline-none'
+                                    className='p-2 border-2 border-neutral-500  text-lg px-10 py-4 rounded-lg bg-neutral-100 outline-none'
                                 />
                             </div>
                         </div>
@@ -218,28 +218,28 @@ export default function RecruiterAddVacancy() {
 
                         <div>
                             <div className='mt-5'>
-                                <h1 className='text-blue-600 font-semibold text-lg'>Adv Date</h1>
+                                <h1 className='text-black font-semibold text-lg'>Adv Date</h1>
                                 <input type="date"
                                     name='advDate'
                                     required
                                     value={formData.advDate}
                                     onChange={changeHandler}
                                     placeholder='Enter Password'
-                                    className='p-2 border-2 border-blue-400  text-lg px-10 py-4 rounded-lg bg-neutral-100 outline-none'
+                                    className='p-2 border-2 border-neutral-500  text-lg px-10 py-4 rounded-lg bg-neutral-100 outline-none'
                                 />
                             </div>
                         </div>
 
                         <div>
                             <div className='mt-5'>
-                                <h1 className='text-blue-600 font-semibold text-lg'>Last Date</h1>
+                                <h1 className='text-black font-semibold text-lg'>Last Date</h1>
                                 <input type="date"
                                     name='lastDate'
                                     required
                                     value={formData.lastDate}
                                     onChange={changeHandler}
                                     placeholder='Enter Password'
-                                    className='p-2 border-2 border-blue-400  text-lg px-10 py-4 rounded-lg bg-neutral-100 outline-none'
+                                    className='p-2 border-2 border-neutral-500  text-lg px-10 py-4 rounded-lg bg-neutral-100 outline-none'
                                 />
                             </div>
                         </div>
@@ -248,42 +248,42 @@ export default function RecruiterAddVacancy() {
 
                         <div>
                             <div className='mt-5'>
-                                <h1 className='text-blue-600 font-semibold text-lg'>Email</h1>
+                                <h1 className='text-black font-semibold text-lg'>Email</h1>
                                 <input type="text"
                                     name='email'
                                     required
                                     value={formData.email}
                                     onChange={changeHandler}
                                     placeholder='Enter Password'
-                                    className='p-2 border-2 border-blue-400  text-lg px-10 py-4 rounded-lg bg-neutral-100 outline-none'
+                                    className='p-2 border-2 border-neutral-500  text-lg px-10 py-4 rounded-lg bg-neutral-100 outline-none'
                                 />
                             </div>
                         </div>
 
                         <div>
                             <div className='mt-5'>
-                                <h1 className='text-blue-600 font-semibold text-lg'>Recruiter</h1>
+                                <h1 className='text-black font-semibold text-lg'>Recruiter</h1>
                                 <input type="text"
                                     name='recruiter'
                                     required
                                     value={formData.recruiter}
                                     onChange={changeHandler}
                                     placeholder='Enter Password'
-                                    className='p-2 border-2 border-blue-400  text-lg px-10 py-4 rounded-lg bg-neutral-100 outline-none'
+                                    className='p-2 border-2 border-neutral-500  text-lg px-10 py-4 rounded-lg bg-neutral-100 outline-none'
                                 />
                             </div>
                         </div>
 
                         <div>
                             <div className='mt-5'>
-                                <h1 className='text-blue-600 font-semibold text-lg'>Recruiter Name</h1>
+                                <h1 className='text-black font-semibold text-lg'>Recruiter Name</h1>
                                 <input type="text"
                                     name='name'
                                     required
                                     value={formData.name}
                                     onChange={changeHandler}
                                     placeholder='Enter Password'
-                                    className='p-2 border-2 border-blue-400  text-lg px-10 py-4 rounded-lg bg-neutral-100 outline-none'
+                                    className='p-2 border-2 border-neutral-500  text-lg px-10 py-4 rounded-lg bg-neutral-100 outline-none'
                                 />
                             </div>
                         </div>

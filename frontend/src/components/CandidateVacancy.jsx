@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios';
 import CandidateNavigationBar from './CandidateNavigationBar';
-
+import toast from 'react-hot-toast';
 export default function CandidateVacancy() {
 
     const [candidateVacancyList, setCandidateVacancyList] = useState([]);
     const [appliedVacancyList, setAppliedVacancyList] = useState([]);
     const [email, setEmail] = useState('');
+    const [render, setRender] = useState(false);
 
     useEffect(() => {
 
@@ -32,7 +33,7 @@ export default function CandidateVacancy() {
         fetchData();
 
 
-    }, [])
+    }, [render]);
 
 
 
@@ -41,7 +42,7 @@ export default function CandidateVacancy() {
             <CandidateNavigationBar />
             <div className='w-[100%] overflow-x-auto'>
                 <table className='w-[100%] '>
-                    <thead className='border-2 border-black w-[100%] bg-neutral-200'>
+                    <thead className='border-2 border-black w-[100%] bg-neutral-200 '>
                         <th className='border-2 border-black  py-6 text-xl font-extrabold'>S.no</th>
                         <th className='border-2 border-black  py-6 text-lgfont-extrabold'>Id</th>
                         <th className='border-2 border-black py-6 text-lg font-extrabold'>Name</th>
@@ -95,8 +96,15 @@ export default function CandidateVacancy() {
                                                             recruiterEmail: item.email,
                                                             post: item.post,
                                                         }
-                                                        const res = await axios.get(`http://localhost:8080/appliedVacancy/candidateAppliedVacancy?data=${JSON.stringify(object)}`);
+                                                        const res = await axios.get(`http://localhost:8080/appliedVacancy/candidateAppliedVacancy?data=${JSON.stringify(object)}`,{
+                                                            headers:{
+                                                                'Content-Type':'Application/json'
+                                                            },
+                                                            withCredentials:true
+                                                        });
                                                         console.log(res);
+                                                        toast.success(`Applied Successfully Vacancy Id : ${item.vacancyId}`);
+                                                        setRender(!render);
                                                     } catch (error) {
                                                         console.log(error);
                                                     }
