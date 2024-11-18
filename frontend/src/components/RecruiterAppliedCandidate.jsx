@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios';
 import CandidateNavigationBar from './CandidateNavigationBar';
 import RecruiterNavigationBar from './RecruiterNavigationBar';
-
+import toast from 'react-hot-toast'
 export default function RecruiterAppliedCandidate() {
 
 
@@ -64,7 +64,7 @@ export default function RecruiterAppliedCandidate() {
                         {
                             appliedVacancyList?.map((item, index) => <tr key={index} className=''>
                                 <td className='border-2 border-black  px-4  py-4 font-semibold'><div className='text-xl'>{index + 1}.</div></td>
-                                <td className='border-2 border-black  px-4   py-4 font-semibold'><div>{item.appliedVacancyList}</div></td>
+                                <td className='border-2 border-black  px-4   py-4 font-semibold'><div>{item.appliedVacancyId}</div></td>
                                 <td className='border-2 border-black  px-4 py-4 font-semibold'><div className='items-center font-bold ml-2'>{item.vacancyId}</div></td>
                                 <td className='border-2 border-black  px-4 py-4 font-semibold w-[8%]'><div className='text-blue-700 '>{item.recruiterEmail}</div></td>
                                 <td className='border-2 border-black px-4  py-4 font-semibold'><div className='ml-2'>{item.post}</div></td>
@@ -100,6 +100,8 @@ export default function RecruiterAppliedCandidate() {
                                                     });
 
                                                     console.log(res);
+                                                    toast.success('Recruiter Status Updated Successfully');
+                                                    
                                                 } catch (error) {
                                                     console.log(error);
                                                 }

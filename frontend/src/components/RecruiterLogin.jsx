@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import axios from 'axios';
+import toast from 'react-hot-toast';
 export default function RecruiterLogin() {
 
     const [formData, setFormData] = useState({
@@ -23,17 +24,25 @@ export default function RecruiterLogin() {
         try {
 
             async function loginRequest() {
-                const response = await axios.post('http://localhost:8080/recruiter/recruiterLogin', {
-                    email: formData.email,
-                    password: formData.password
-                }, {
-                    headers: {
-                        'Content-type': "application/json"
-                    },
-                   // withCredentials: true
-                });
 
-                console.log(response);
+                try {
+                    const response = await axios.post('http://localhost:8080/recruiter/recruiterLogin', {
+                        email: formData.email,
+                        password: formData.password
+                    }, {
+                        headers: {
+                            'Content-type': "application/json"
+                        },
+                       // withCredentials: true
+                    });
+    
+                    console.log(response);
+                    toast.success('Recruiter Logged In Successfully');
+                } catch (error) {
+                    toast.error('Unable to Login');
+                    console.log(error);
+                }
+               
 
 
 

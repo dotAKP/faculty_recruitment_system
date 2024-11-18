@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import axios from 'axios';
 import RecruiterNavigationBar from './RecruiterNavigationBar';
+import toast from 'react-hot-toast';
 export default function RecruiterAddVacancy() {
 
     const [formData, setFormData] = useState({
@@ -43,6 +44,7 @@ export default function RecruiterAddVacancy() {
                 });
 
                 console.log(response);
+                toast.success('Vacancy Added Successfully');
             } catch (error) {
                 console.log(error);
             }
@@ -72,6 +74,7 @@ export default function RecruiterAddVacancy() {
                             <div className='mt-5'>
                                 <h1 className='text-blue-600 font-semibold text-lg'>Post</h1>
                                 <input type="text"
+                                required
                                     name='post'
                                     value={formData.post}
                                     onChange={changeHandler}
@@ -102,6 +105,7 @@ export default function RecruiterAddVacancy() {
                                 </select> :
                                     <div>
                                         <input type="text"
+                                        required
                                             name='subject'
                                             value={formData.subject}
                                             onChange={changeHandler}
@@ -116,6 +120,7 @@ export default function RecruiterAddVacancy() {
                             <div className='mt-5'>
                                 <h1 className='text-blue-600 font-semibold text-lg'>Location</h1>
                                 <input type="text"
+                                required
                                     name='location'
                                     value={formData.location}
                                     onChange={changeHandler}
@@ -129,6 +134,7 @@ export default function RecruiterAddVacancy() {
                             <h1 className='text-blue-600 font-semibold text-lg'>Criteria</h1>
                             <select
                                 name='criteria'
+                                required
                                 className='p-2  border-2 border-blue-400  text-lg px-14 py-4 rounded-lg bg-neutral-100 outline-none'
                                 value={formData.criteria}
                                 onChange={changeHandler}
@@ -147,6 +153,7 @@ export default function RecruiterAddVacancy() {
                             <h1 className='text-blue-600 font-semibold text-lg'>Experience</h1>
                             <select
                                 name='experience'
+                                required
                                 className='p-2  border-2 border-blue-400  text-lg px-14 py-4 rounded-lg bg-neutral-100 outline-none'
                                 value={formData.experience}
                                 onChange={changeHandler}
@@ -163,7 +170,7 @@ export default function RecruiterAddVacancy() {
 
                         <div className='mt-5'>
                             <h1 className='text-blue-600 font-semibold text-lg'>Mode</h1>
-                            <select
+                            <select required
                                 name='mode'
                                 className='p-2  border-2 border-blue-400  text-lg px-14 py-4 rounded-lg bg-neutral-100 outline-none'
                                 value={formData.mode}
@@ -181,6 +188,7 @@ export default function RecruiterAddVacancy() {
                             <div className='mt-5'>
                                 <h1 className='text-blue-600 font-semibold text-lg'>Vacancy</h1>
                                 <input type="text"
+                                required
                                     name='vacancy'
                                     value={formData.vacancy}
                                     onChange={changeHandler}
@@ -195,6 +203,7 @@ export default function RecruiterAddVacancy() {
                                 <h1 className='text-blue-600 font-semibold text-lg'>Salary</h1>
                                 <input type="text"
                                     name='salary'
+                                    required
                                     value={formData.salary}
                                     onChange={changeHandler}
                                     placeholder='Enter Password'
@@ -212,6 +221,7 @@ export default function RecruiterAddVacancy() {
                                 <h1 className='text-blue-600 font-semibold text-lg'>Adv Date</h1>
                                 <input type="date"
                                     name='advDate'
+                                    required
                                     value={formData.advDate}
                                     onChange={changeHandler}
                                     placeholder='Enter Password'
@@ -225,6 +235,7 @@ export default function RecruiterAddVacancy() {
                                 <h1 className='text-blue-600 font-semibold text-lg'>Last Date</h1>
                                 <input type="date"
                                     name='lastDate'
+                                    required
                                     value={formData.lastDate}
                                     onChange={changeHandler}
                                     placeholder='Enter Password'
@@ -240,6 +251,7 @@ export default function RecruiterAddVacancy() {
                                 <h1 className='text-blue-600 font-semibold text-lg'>Email</h1>
                                 <input type="text"
                                     name='email'
+                                    required
                                     value={formData.email}
                                     onChange={changeHandler}
                                     placeholder='Enter Password'
@@ -253,6 +265,7 @@ export default function RecruiterAddVacancy() {
                                 <h1 className='text-blue-600 font-semibold text-lg'>Recruiter</h1>
                                 <input type="text"
                                     name='recruiter'
+                                    required
                                     value={formData.recruiter}
                                     onChange={changeHandler}
                                     placeholder='Enter Password'
@@ -266,6 +279,7 @@ export default function RecruiterAddVacancy() {
                                 <h1 className='text-blue-600 font-semibold text-lg'>Recruiter Name</h1>
                                 <input type="text"
                                     name='name'
+                                    required
                                     value={formData.name}
                                     onChange={changeHandler}
                                     placeholder='Enter Password'

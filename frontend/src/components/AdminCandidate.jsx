@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios';
 import AdminNavigationBar from './AdminNavigationBar';
-
+import toast from 'react-hot-toast';
 export default function AdminCandidate() {
 
     const [candidateList, setCandidateList] = useState([]);
@@ -64,8 +64,30 @@ export default function AdminCandidate() {
                                 <td className='border-2 border-black px-2  py-4 font-semibold'><div className={`ml-4`}>{item.percentage}</div></td>
                                 <td className='border-2 border-black px-2  py-4 font-semibold'><div className={`ml-2`}>{item.experience}</div></td>
                                 <td className='border-2 border-black px-2  py-4 font-semibold'><div className={`ml-2`}>{item.gender}</div></td>
-                                <td className='border-2 border-black px-2  py-4 font-semibold'><div className={`${item.emailVerify == 'verified' ? 'text-green-500':"text-red-600"} font-bold text-lg ml-4`}>{item.emailVerify}</div></td>
-                                <td className='border-2 border-black px-2  py-4 font-semibold'><div className={`${item.adminVerify == 'verified' ? 'text-green-500':"text-red-600"} font-bold text-lg ml-4`}>{item.adminVerify}</div></td>
+                                <td className='border-2 border-black px-2  py-4 font-semibold'><div className={`${item.emailVerify == 'verified' ? 'text-green-500':"text-red-600"} font-bold text-lg ml-4`}
+                                
+                                >{item.emailVerify}</div></td>
+                                <td className='border-2 border-black px-2  py-4 font-semibold'><div className={`${item.adminVerify == 'verified' ? 'text-green-500':"text-red-600"} font-bold text-lg ml-4`}
+                                onClick={()=>{
+
+                                    async function apiCall(){
+                                       try {
+                                        
+                                        const response = await axios.get(`http://localhost:8080/admin/adminVerifyCandidate?candidateEmail=${item.emai_id}`,{
+                                            headers:{
+                                                'Content-Type':'Application/json'
+                                            },
+                                            withCredentials:true
+                                        });
+                                        console.log(response);
+                                        toast.success('Candidate Verify Successfully');
+                                       } catch (error) {
+                                        console.log(error);
+                                       }
+                                    }
+                                    apiCall();
+                                }}
+                                >{item.adminVerify}</div></td>
                             </tr>
                             )
 
