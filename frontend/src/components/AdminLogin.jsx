@@ -1,11 +1,14 @@
 import React, {useState} from 'react'
 import axios from 'axios';
+import toast from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
 export default function AdminLogin() {
 
     const [formData, setFormData] = useState({
-        email:'',
-        password:''
-    }) 
+        email:'admin@gmail.com',
+        password:'12345678'
+    });
+    const navigate = useNavigate(); 
 
 
     function changeHandler(event) {
@@ -33,6 +36,8 @@ export default function AdminLogin() {
             });
 
             console.log(res);
+            toast.success('Admin Logged In Successfully');
+            navigate('/adminHome');
            } catch (error) {
             console.log(error);
            }

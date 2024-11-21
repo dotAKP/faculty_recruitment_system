@@ -1,19 +1,19 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios';
 import CandidateNavigationBar from './CandidateNavigationBar';
-import toast from 'react-hot-toast';
-export default function CandidateVacancy() {
+import RecruiterNavigationBar from './RecruiterNavigationBar';
 
-    const [candidateVacancyList, setCandidateVacancyList] = useState([]);
-    const [appliedVacancyList, setAppliedVacancyList] = useState([]);
+export default function RecruiterPostedVacancy() {
+
+
+    const [vacancyList, setVacancyList] = useState([]);
     const [email, setEmail] = useState('');
-    const [render, setRender] = useState(false);
 
     useEffect(() => {
 
         async function fetchData() {
             try {
-                const response = await axios.get('http://localhost:8080/candidate/candidateVacancyList', {
+                const response = await axios.get('http://localhost:8080/recruiter/vacancyPosted', {
                     headers: {
                         'Content-Type': 'application/json',
                         'Accept': 'application/json'
@@ -22,8 +22,7 @@ export default function CandidateVacancy() {
 
                 });
                 console.log(response);
-                setCandidateVacancyList(response.data.vacancyList);
-                setAppliedVacancyList(response.data.status);
+                setVacancyList(response.data.vacancyList);
                 setEmail(response.data.email);
             } catch (error) {
                 console.log(error);
@@ -33,16 +32,16 @@ export default function CandidateVacancy() {
         fetchData();
 
 
-    }, [render]);
+    }, [])
 
 
 
     return (
         <div className=''>
-            <CandidateNavigationBar />
+            <RecruiterNavigationBar />
             <div className='w-[100%] overflow-x-auto'>
                 <table className='w-[100%] '>
-                    <thead className='border-2 border-black w-[100%] bg-neutral-200 '>
+                    <thead className='border-2 border-black w-[100%] bg-neutral-200'>
                         <th className='border-2 border-black  py-6 text-xl font-extrabold'>S.no</th>
                         <th className='border-2 border-black  py-6 text-lgfont-extrabold'>Id</th>
                         <th className='border-2 border-black py-6 text-lg font-extrabold'>Name</th>
@@ -59,11 +58,11 @@ export default function CandidateVacancy() {
                         <th className='border-2 border-black  py-6 text-lg font-extrabold'>Experiance</th>
                         <th className='border-2 border-black  py-6 text-lg font-extrabold'>Adv Date</th>
                         <th className='border-2 border-black  py-6 text-lg font-extrabold'>Last Date</th>
-                        <th className='border-2 border-black  py-6 text-lg font-extrabold'>Apply</th>
+
                     </thead>
                     <tbody>
                         {
-                            candidateVacancyList?.map((item, index) => <tr key={index} className=''>
+                            vacancyList?.map((item, index) => <tr key={index} className=''>
                                 <td className='border-2 border-black  px-4  py-4 font-semibold'><div className='text-xl'>{index + 1}.</div></td>
                                 <td className='border-2 border-black  px-4   py-4 font-semibold'><div>{item._id}</div></td>
                                 <td className='border-2 border-black  px-4 py-4 font-semibold'><div className='items-center font-bold ml-2'>{item.name}</div></td>
@@ -80,41 +79,7 @@ export default function CandidateVacancy() {
                                 <td className='border-2 border-black px-4  py-4 font-semibold'><div className={`ml-2`}>{item.experience}</div></td>
                                 <td className='border-2 border-black px-4  py-4 font-semibold'><div className={`ml-2`}>{item.advDate}</div></td>
                                 <td className='border-2 border-black px-4  py-4 font-semibold'><div className={`ml-2`}>{item.lastDate}</div></td>
-                                <td className='border-2 border-black px-4  py-4 font-semibold'><div className={`ml-2`}>{
-                                    appliedVacancyList.some((ele) => ele.vacancyId == item.vacancyId && ele.candidateEmail == email)
-                                        ? <div className='text-green-600 font-bold text-lg'>
-                                            Applied
-                                        </div>
-                                        :
-                                        <div className='text-blue-600 font-bold text-lg'
-                                            onClick={() => {
-                                                async function hitRequest() {
-                                                    try {
-                                                        const object = {
-                                                            vacancyId: item.vacancyId,
-                                                            candidateEmail: email,
-                                                            recruiterEmail: item.email,
-                                                            post: item.post,
-                                                        }
-                                                        const res = await axios.get(`http://localhost:8080/appliedVacancy/candidateAppliedVacancy?data=${JSON.stringify(object)}`,{
-                                                            headers:{
-                                                                'Content-Type':'Application/json'
-                                                            },
-                                                            withCredentials:true
-                                                        });
-                                                        console.log(res);
-                                                        toast.success(`Applied Successfully Vacancy Id : ${item.vacancyId}`);
-                                                        setRender(!render);
-                                                    } catch (error) {
-                                                        console.log(error);
-                                                    }
-                                                }
-                                                hitRequest();
-                                            }}
-                                        >
-                                            Apply
-                                        </div>
-                                }</div></td>
+                               
 
                             </tr>
                             )

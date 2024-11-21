@@ -1,11 +1,14 @@
 import React,{useState} from 'react'
 import axios from 'axios';
+import toast from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
 export default function CandidateLogin() {
-
+    
+    const navigate = useNavigate();
 
     const [formData, setFormData] = useState({
-        email:'',
-        password:''
+        email:'ashishkumarpatel920@gmail.com',
+        password:'12345678'
     }) 
 
 
@@ -33,6 +36,8 @@ export default function CandidateLogin() {
          });
 
          console.log(res);
+         toast.success('Candidate Logged In Successfully');
+         navigate('/candidateVacancy');
         } catch (error) {
          console.log(error);
         }
@@ -45,9 +50,9 @@ export default function CandidateLogin() {
 
     return (
         <div className='bg-neutral-400 min-h-screen flex justify-center items-center w-[100%] '>
-            <form onSubmit={submitHandler} className='bg-white py-10 px-12 rounded-lg'>
-                <div>
-                    <h1 className='font-bold text-4xl text-black '>Candidate Login </h1>
+            <form onSubmit={submitHandler} className='bg-white   rounded-lg'>
+                <div className='bg-black rounded-t-lg'>
+                    <h1 className='font-bold text-4xl text-white px-16 py-6  '>Candidate Login </h1>
                 </div>
 
                 <div className='mt-5 flex justify-center'>
@@ -80,7 +85,7 @@ export default function CandidateLogin() {
                     </div>
                 </div>
 
-                <div className='flex justify-center mt-12'>
+                <div className='flex justify-center mt-12 mb-12'>
                     <button className='bg-black px-12 py-4 text-white text-lg font-bold rounded-lg'>Submit</button>
                 </div>
             </form>
